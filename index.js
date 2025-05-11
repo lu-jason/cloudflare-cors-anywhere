@@ -45,6 +45,7 @@ addEventListener("fetch", async event => {
         function setupCORSHeaders(headers) {
             headers.set("Access-Control-Allow-Origin", event.request.headers.get("Origin"));
             if (isPreflightRequest) {
+                console.log("Received pre-flight request");
                 headers.set("Access-Control-Allow-Methods", event.request.headers.get("access-control-request-method"));
                 const requestedHeaders = event.request.headers.get("access-control-request-headers");
 
@@ -53,6 +54,8 @@ addEventListener("fetch", async event => {
                 }
 
                 headers.delete("X-Content-Type-Options"); // Remove X-Content-Type-Options header
+
+                console.log("All headers", headers);
             }
             return headers;
         }
